@@ -10,7 +10,7 @@ import com.semi.demo.entity.User;
 @Mapper
 public interface TestDAO {
 	
-	@Select("select * from user where isDel=0")
+	@Select("select * from users")
 	List<User> getList();
 	
 }
