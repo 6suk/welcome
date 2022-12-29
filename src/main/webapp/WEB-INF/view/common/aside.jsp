@@ -51,12 +51,12 @@
 							<td>${loginuser.uid}</td>
 						</tr>
 						<tr>
-							<th>가입일</th>
-							<td>${loginuser.regDate}</td>
-						</tr>
-						<tr>
 							<th>지역</th>
 							<td>${loginuser.area}</td>
+						</tr>
+						<tr>
+							<th>가입일</th>
+							<td>${fn:substringBefore(loginuser.regDate, 'T')}</td>
 						</tr>
 						<c:choose>
 							<c:when test="${empty loginuser.email}">

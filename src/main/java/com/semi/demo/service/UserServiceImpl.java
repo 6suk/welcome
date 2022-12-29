@@ -35,8 +35,15 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void update(User u) {
-		userDao.update(u);
+	public void update(User user) {
+		if (user.getPwd() == null || user.getPwd().isEmpty()) {
+			User u = userDao.get(user.getUid());
+			user.setPwd(u.getPwd());
+		} else {
+			String cryptedPwd = BCrypt.hashpw(user.getPwd(), BCrypt.gensalt());
+			user.setPwd(cryptedPwd);
+		}
+		userDao.update(user);
 	}
 
 	@Override
@@ -46,14 +53,16 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int login(String uid, String pwd) {
+		// uid가 있다면 user 반납 -> 없다면 user == null
 		User u = userDao.get(uid);
-		if (u.getUid() != null) { // uid 존재
+
+		if (u != null) { // uid 존재
 			if (BCrypt.checkpw(pwd, u.getPwd())) {
 				return CORRECT_LOGIN;
 			} else {
 				return WRONG_PASSWORD;
 			}
 		} // uid 없음
-		return 0;
+		return UserService.UID_NOT_EXIST;
 	}
 }

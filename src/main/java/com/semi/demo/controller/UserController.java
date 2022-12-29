@@ -58,16 +58,29 @@ public class UserController {
 		String email = req.getParameter("email");
 		String area = req.getParameter("area");
 
-		if (!pwdBox[0].equals(pwdBox[1])) {
-			System.out.println("비밀번호가 일치하지 않습니다.");
-			return "redirect:/user/register";
-		} else {
-			User u = new User(uid, pwdBox[0], uname, email, area);
-			service.register(u);
-			return "redirect:/user/list";
+		User u = service.get(uid);
+		// uid가 db에 있으면
+		if (u != null) {
+			model.addAttribute("msg", "중복 아이디입니다.");
+			model.addAttribute("url", "/user/register");
+			return "user/msg";
+		}
+		// 없으면
+		else {
+			if (!pwdBox[0].equals(pwdBox[1])) {
+				model.addAttribute("msg", "비밀번호 오류");
+				model.addAttribute("url", "/user/register/");
+				return "/user/msg";
+			} else {
+				User u1 = new User(uid, pwdBox[0], uname, email, area);
+				service.register(u1);
+				model.addAttribute("msg", "회원가입이 완료되었습니다.");
+				model.addAttribute("url", "/user/login");
+				return "/user/msg";
+			}
 		}
 	}
-	
+
 	/** 회원 정보 수정 */
 	@GetMapping("/update/{uid}")
 	public String updateForm(@PathVariable String uid, Model model) {
@@ -78,6 +91,8 @@ public class UserController {
 
 	@PostMapping("/update")
 	public String update(HttpServletRequest req, Model model) {
+		HttpSession ss = req.getSession();
+		
 		String uid = req.getParameter("uid");
 		String pwdbox[] = req.getParameterValues("pwd");
 		String uname = req.getParameter("name");
@@ -99,16 +114,20 @@ public class UserController {
 		}
 
 		if (!pwdbox[0].equals(pwdbox[1])) {
-			System.out.println("비밀번호 오류");
-			return "redirect:/user/list";
+			model.addAttribute("msg", "비밀번호 오류");
+			model.addAttribute("url", "/user/update/" + uid);
+			return "/user/msg";
 		} else {
 			service.update(u);
-			System.out.println("정보 수정 완료");
-			return "redirect:/user/list";
+			/** 세션 등록 추가 */
+			ss.setAttribute("loginuser", u);
+			model.addAttribute("msg", "개인정보 수정 완료");
+			model.addAttribute("url", "/user/list");
+			return "/user/msg";
 		}
 
 	}
-	
+
 	/** 로그인 */
 	@GetMapping("/login")
 	public String loginForm(HttpServletRequest req) {
@@ -127,6 +146,7 @@ public class UserController {
 		switch (result) {
 		case UserService.CORRECT_LOGIN:
 			User u = service.get(uid);
+			/** 세션등록 User 객체로 변경 */
 			ss.setAttribute("loginuser", u);
 			return "redirect:/user/list";
 
@@ -137,18 +157,35 @@ public class UserController {
 
 		case UserService.UID_NOT_EXIST:
 			model.addAttribute("msg", "회원 가입 페이지로 이동합니다.");
-			return "/user/login";
+			model.addAttribute("url", "/user/register");
+			return "/user/msg";
 
 		default:
 			return "";
 		}
 	}
-	
+
 	/** 로그아웃 */
 	@RequestMapping("/logout")
-	public String logout(HttpServletRequest req) {
+	public String logout(HttpServletRequest req, Model model) {
 		HttpSession ss = req.getSession();
 		ss.invalidate();
+		model.addAttribute("msg", "로그아웃 되었습니다.");
+		model.addAttribute("url", "/user/login");
+		return "/user/msg";
+	}
+	
+	/** 회원 삭제 */
+	@GetMapping("/delete/{uid}")
+	public String delete(@PathVariable String uid) {
+		service.delete(uid);
+		return "user/delete";
+	}
+	
+	@GetMapping("/delete/c/{uid}")
+	public String deleteC(@PathVariable String uid) {
+		service.delete(uid);
 		return "redirect:/user/list";
 	}
+
 }

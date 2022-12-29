@@ -12,7 +12,7 @@ import com.semi.demo.entity.User;
 @Mapper
 public interface UserDAO {
 
-	@Select("select * from user")
+	@Select("select * from user where isDel=0")
 	List<User> getList();
 
 	@Select("select * from user where uid=#{uid}")
@@ -21,7 +21,7 @@ public interface UserDAO {
 	@Insert("insert into user values(#{uid}, #{pwd}, #{uname}, #{email}, #{area}, default, default)")
 	void insert(User u);
 	
-	@Update("update user set uname=#{uname}, email=#{email}, area=#{area} where uid=#{uid}")
+	@Update("update user set uname=#{uname}, email=#{email}, area=#{area}, pwd =#{pwd} where uid=#{uid}")
 	void update(User u);
 	
 	@Update("update user set isDel=1 where uid=#{uid}")

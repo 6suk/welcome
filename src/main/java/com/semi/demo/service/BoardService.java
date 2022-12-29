@@ -21,7 +21,7 @@ public interface BoardService {
 	Board bInfo(int bid);
 
 	/** 게시물 등록 */
-	void bInsert(Board b, MultipartFile thum);
+	void bInsert(Board b, MultipartFile thum, User u);
 
 	/** 게시물 수정 */
 	void bUpdate(Board b);

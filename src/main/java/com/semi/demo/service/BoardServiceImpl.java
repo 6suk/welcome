@@ -61,7 +61,7 @@ public class BoardServiceImpl implements BoardService {
 			
 		case B_AREA:
 			// 가까운 유치원 리스트
-			list = bdao.areaList(uid);
+			list = bdao.areaList(u.getArea());
 			return list;
 		default:
 			break;
@@ -79,7 +79,9 @@ public class BoardServiceImpl implements BoardService {
 	String uploadDir;
 
 	@Override
-	public void bInsert(Board b, MultipartFile thum) {
+	public void bInsert(Board b, MultipartFile thum, User u) {
+		System.out.println(u.toString());
+		b.setUid(u.getUid());
 		
 		/** 태그 */
 		String[] tagBox = b.getTag().split(",");

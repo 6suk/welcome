@@ -13,19 +13,18 @@
 </head>
 <body>
 <%@ include file="../common/top.jsp"%>
-	<div class="contain-01">
-		<div class="contain-02">
-			<div class="title">
-				  <h1>회원가입</h1>
-          <input
-            type="button"
-            value="Home"
-            onclick="location.href ='#'"
-          />
-        </div>
+	<div class="inputtb container justify-content-center">
+		<div class="inputtb content">
+			<div class="inputtb content-title py-4 mt-3">
+				  <h3>회원가입</h3>
+         	<div class="">
+					<button class="btn small subcolor"
+						onclick="location.href='/board/list'">Home</button>
+				</div>
+			</div>
 
-        <form action="/user/register" method="post">
-          <table>
+        <form action="/user/register" class="py-4" method="post">
+          <table class = "inputtb content-desc">
             <tr>
 						<th>아이디</th>
 						<td><input type="text" name="uid" placeholder="*아이디" maxlength="12" required /></td>
@@ -68,7 +67,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td colspan="2"><input type="submit" value="회원가입" /></td>
+						<td colspan="2"><input type="submit" class= "btn full maincolor" value="회원가입" /></td>
 					</tr>
 				</table>
 			</form>

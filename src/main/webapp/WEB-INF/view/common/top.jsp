@@ -6,11 +6,11 @@
 <nav class="navbar navbar-expand navbar-light fixed-top">
       <div class="container-md px-md-5">
         <ul class="navbar-nav">
-          <a class="navbar-brand" href="#">
+          <a class="navbar-brand" href="/board/list">
           <img src='/img/logo.png' class="logo"/>
           </a>
           <li class="nav-item">
-            <a class="nav-link" href="#">Home</a>
+            <a class="nav-link" href="/board/list">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link ${view eq 0 ? 'active' : ''}" href="/board/list/0">전체리스트</a>
@@ -26,7 +26,7 @@
           </li>
         </ul>
         <c:choose>
-        <c:when test="${empty uid}">
+        <c:when test="${empty loginuser.uid}">
         <ul class="navbar-nav">
           <li class="nav-item" style="font-weight: 800">
             <a class="nav-link ${menu eq 'login' ? 'active' : ''}" href="/user/login">로그인</a>

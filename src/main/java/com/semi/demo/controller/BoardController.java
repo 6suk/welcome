@@ -33,6 +33,7 @@ public class BoardController {
 	@RequestMapping({ "/list/{view}", "/list" })
 	public String list(@PathVariable(required = false) Integer view, HttpServletRequest req, Model model) {
 		HttpSession ss = req.getSession();
+		
 		view = view == null ? 0 : view;
 		
 		// jsp --> 타이틀 전달
@@ -42,8 +43,8 @@ public class BoardController {
 		// top active용 --> 나중에 필터로 변경될 수 있음
 		ss.setAttribute("view", view);
 		User u = (User) ss.getAttribute("loginuser");	// 로그인 유저(세션) 받아오기
-		
 		List<Board> list = bsv.viewList(view, u);
+		
 		if (u != null) {
 			List<BookMark> mlist = bsv.mGetList(u.getUid());
 			model.addAttribute("mlist", mlist);
@@ -69,7 +70,10 @@ public class BoardController {
 	@PostMapping("/write")
 	public String write(MultipartHttpServletRequest req, @ModelAttribute Board b) {
 		MultipartFile file = req.getFile("file");
-		bsv.bInsert(b, file);
+		HttpSession ss = req.getSession();
+		User u = (User) ss.getAttribute("loginuser");
+		
+		bsv.bInsert(b, file, u);
 		return "redirect:/board/list";
 	}
 	
