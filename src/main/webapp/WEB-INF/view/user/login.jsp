@@ -18,11 +18,11 @@
 				<h3>로그인</h3>
 				<div class="">
 					<button class="btn small subcolor"
-						onclick="location.href='/user/list'">Home</button>
+						onclick="location.href='/board/list'">Home</button>
 				</div>
 			</div>
 
-			<form action="/user/login"" class="pt-3" method="post">
+			<form action="/user/login" class="pt-3" method="post">
 				<table class="inputtb content-desc">
 					<tr>
 						<th>아이디</th>

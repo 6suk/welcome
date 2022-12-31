@@ -37,10 +37,10 @@
 							<td>${u.uname}</td>
 							<td>${u.email}</td>
 							<td>${u.area}</td>
-							<td>${u.regDate}</td>
+							<td>${fn:substringBefore(loginuser.regDate, 'T')}</td>
 							<td>
 							<c:choose>
-								<c:when test="${uid eq u.uid or uid eq 'admin'}">
+								<c:when test="${uid eq 'admin'}">
 									<button class="btn action subcolor" type="button"
 										onclick="location.href='/user/update?uid=${u.uid}'">수정</button>
 								</c:when>

@@ -43,7 +43,7 @@
 					</tr>
 					<tr>
 						<th>이메일</th>
-						<td><input type="email" name="email" placeholder="*이메일" maxlength="40" required />
+						<td><input type="email" name="email" placeholder="*이메일" maxlength="40" />
 						</td>
 					</tr>
 					<tr>

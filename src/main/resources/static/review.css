@@ -1,0 +1,46 @@
+.starrr {
+  /* display: inline-block; */
+  text-align: center;
+}
+.starrr a {
+  font-size: 30px;
+  padding: 0 1px;
+  cursor: pointer;
+  color: #ffd119;
+  text-decoration: none;
+}
+
+.info-star span {
+  font-size: 18px;
+  padding: 0 1px;
+  color: #cacaca;
+  text-decoration: none;
+}
+
+.info-star span.on {
+  font-size: 18px;
+  padding: 0 1px;
+  color: #ffd119;
+  text-decoration: none;
+}
+
+.re-star span {
+  font-size: 16px;
+  padding: 0 0px;
+  color: #cacaca;
+  text-decoration: none;
+}
+
+.re-star span.on {
+  font-size: 16px;
+  padding: 0 0px;
+  color: #ffd119;
+  text-decoration: none;
+}
+.your-choice-was {
+  text-align: center;
+}
+
+#star2.starrr a {
+	color: #dcdcdc !important;
+}

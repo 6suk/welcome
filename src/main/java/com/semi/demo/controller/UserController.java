@@ -33,15 +33,6 @@ public class UserController {
 		return "user/list";
 	}
 
-	/** ?? 이건 뭘까용.. ㅎㅎ */
-	@RequestMapping("/detail/{uid}")
-	public String detail(@PathVariable String uid, Model model) {
-		User user = service.get(uid);
-		System.out.println(user);
-		model.addAttribute("user", user);
-		return "redirect:/user/list";
-	}
-
 	/** C : 회원가입 */
 	@GetMapping("/register")
 	public String registerFrom(HttpServletRequest req) {
@@ -120,6 +111,7 @@ public class UserController {
 		} else {
 			service.update(u);
 			/** 세션 등록 추가 */
+			u = service.get(uid);
 			ss.setAttribute("loginuser", u);
 			model.addAttribute("msg", "개인정보 수정 완료");
 			model.addAttribute("url", "/user/list");
@@ -148,7 +140,7 @@ public class UserController {
 			User u = service.get(uid);
 			/** 세션등록 User 객체로 변경 */
 			ss.setAttribute("loginuser", u);
-			return "redirect:/user/list";
+			return "redirect:/board/main";
 
 		case UserService.WRONG_PASSWORD:
 			model.addAttribute("msg", "잘못된 패스워드 입니다.");

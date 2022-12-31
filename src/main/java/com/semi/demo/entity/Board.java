@@ -22,13 +22,14 @@ public class Board {
 	private int likeCnt;
 	private int viewCnt;
 	private int reCnt;
+	private int grade_;
 
 	public Board() {
 	}
 
 	public Board(int bid, String uid, String title, String thum, String addr, String area, String content, String tel,
-			String tag, String closeTime, String homepage, LocalDateTime modTime, int rec, int isDel, double grade,
-			int likeCnt, int viewCnt, int reCnt) {
+			String tag, String[] tagBox, String closeTime, String homepage, LocalDateTime modTime, int rec, int isDel,
+			double grade, int likeCnt, int viewCnt, int reCnt, int grade_) {
 		super();
 		this.bid = bid;
 		this.uid = uid;
@@ -39,6 +40,7 @@ public class Board {
 		this.content = content;
 		this.tel = tel;
 		this.tag = tag;
+		this.tagBox = tagBox;
 		this.closeTime = closeTime;
 		this.homepage = homepage;
 		this.modTime = modTime;
@@ -48,7 +50,11 @@ public class Board {
 		this.likeCnt = likeCnt;
 		this.viewCnt = viewCnt;
 		this.reCnt = reCnt;
+		this.grade_ = (int)this.grade;
 	}
+
+
+
 
 	public int getBid() {
 		return bid;
@@ -205,6 +211,12 @@ public class Board {
 	public void setTagBox(String[] tagBox) {
 		this.tagBox = tagBox;
 	}
+
+
+	public int getGrade_() {
+		return (int) this.grade;
+	}
+
 
 	@Override
 	public String toString() {

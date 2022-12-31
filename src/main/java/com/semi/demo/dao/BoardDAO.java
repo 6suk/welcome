@@ -30,7 +30,7 @@ public interface BoardDAO {
 	@Select("select * from board where bid=#{bid}")
 	Board bInfo(int bid);
 	
-	@Insert("insert into board values(DEFAULT, #{uid}, #{title}, #{thum}, #{addr}, #{area}, #{content}, #{tel}, #{tag}, #{closeTime}, #{homepage}, DEFAULT, #{rec}, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT)")
+	@Insert("insert into board values(DEFAULT, 'admin', #{title}, #{thum}, #{addr}, #{area}, #{content}, #{tel}, #{tag}, #{closeTime}, #{homepage}, DEFAULT, #{rec}, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT)")
 	void bInsert(Board b);
 	
 	@Update("UPDATE board SET title = #{title} , thum = #{thum}, addr = #{addr}, area = #{area}, content = #{content}, tel = #{tel}, tag = #{tag}, closeTime=#{closeTime}, homepage=#{homepage}, modTime=NOW() bid = #{bid};")
@@ -38,6 +38,16 @@ public interface BoardDAO {
 	
 	@Update("UPDATE board SET isDel = 1 WHERE bid = #{bid};")
 	void bDelete(int bid);
+	
+	@Update("")
+	void findBoard(String s);
+	
+	@Update("UPDATE board SET grade = #{avg} WHERE bid = #{bid};")
+	void gradeAvgUpdate(double avg, int bid);
+	
+	@Update("UPDATE board SET reCnt = reCnt+1 WHERE bid = #{bid};")
+	void reCntUpdate(int bid);
+	
 	
 	
 }
