@@ -195,31 +195,6 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<String> getStar(double grade) {
-		List<String> list = new ArrayList<>();
-
-		if (grade != 0) {
-			boolean run = true;
-			int cnt = 3;
-			int tmp = 1;
-
-			while (run) {
-				if (tmp <= cnt) {
-					list.add("on");
-				} else {
-					list.add("");
-				}
-				if (tmp == 5)
-					run = false;
-				tmp++;
-			}
-		} else {
-			list = Arrays.asList("", "", "", "", "");
-		}
-		return list;
-	}
-
-	@Override
 	public String tagSplit(String tag) {
 		String[] tagBox_ = !tag.isBlank() ? tag.trim().replaceAll("[^ㄱ-ㅎㅏ-ㅣ가-힣a-zA-Z0-9#]", "").split("value") : null;
 		StringBuilder sb = new StringBuilder();
@@ -230,6 +205,12 @@ public class BoardServiceImpl implements BoardService {
 			sb.deleteCharAt(sb.length() - 1);
 		}
 		return sb.toString();
+	}
+	
+	/** 조회수 증가 */
+	@Override
+	public void increaseViewCount(int bid) {
+		bdao.increaseCount(bid);
 	}
 
 	

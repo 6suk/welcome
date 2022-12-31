@@ -48,6 +48,10 @@ public interface BoardDAO {
 	@Update("UPDATE board SET reCnt = reCnt+1 WHERE bid = #{bid};")
 	void reCntUpdate(int bid);
 	
+	/** 조회수 증가 */
+	@Update("UPDATE board SET viewCnt = viewCnt+1 WHERE bid=#{bid}")
+	public void increaseCount(int bid);
+	
 	
 	
 }

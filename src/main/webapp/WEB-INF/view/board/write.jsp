@@ -106,7 +106,7 @@
 	<%@ include file="../common/bottom.jsp"%>
 	<script>
 		CKEDITOR.replace('content', {
-			filebrowserImageUploadUrl : '/bbs/board/imageupload',
+			filebrowserImageUploadUrl : '/board/upload',
 			filebrowserUploadMethod : 'form',
 			height : 400
 		});

@@ -68,8 +68,11 @@ pageContext.setAttribute("newline", "\n");
 									<th>평점</th>
 									<td>
 										<div class="info-star">
-											<c:forEach var='c' items="${starlist }">
-												<span class="fa-star fa ${c }"></span>
+											<c:forEach begin="1" end="${b.grade_ }">
+												<span class="fa-star fa on"></span>
+											</c:forEach>
+											<c:forEach begin="1" end="${5 - b.grade_ }">
+												<span class="fa-star fa"></span>
 											</c:forEach>
 											<span style="font-size: 16px; font-weight: 300;">&nbsp;${b.grade }</span>
 										</div>
@@ -139,7 +142,30 @@ pageContext.setAttribute("newline", "\n");
 				<div class="reply-content pt-3">
 					<c:forEach var="r" items="${rlist }">
 						<c:choose>
-							<c:when test="${r.uid eq loginuser.uid }">
+							<c:when test="${empty loginuser.uid or r.uid ne loginuser.uid }">
+								<div class="d-flex flex-row mt-3">
+									<div class="card subcolor w-75">
+										<div class="card-body">
+											<div class="le-padding">
+												<div class="re-star mb-2">
+													<c:forEach begin="1" end="${r.grade }">
+														<span class="fa-star fa on"></span>
+													</c:forEach>
+													<c:forEach begin="1" end="${5 - r.grade }">
+														<span class="fa-star fa"></span>
+													</c:forEach>
+												</div>
+												<div class="line"></div>
+												<div class="reply-decs">${r.content }</div>
+												<div class="reply-info mt-2">
+													<span>${r.uname }</span> <span>${fn:replace(r.modTime,'T',' ')}</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</c:when>
+							<c:otherwise>
 								<div class="d-flex flex-row-reverse mt-3">
 									<div class="card subcolor w-75">
 										<div class="card-body text-end">
@@ -155,36 +181,13 @@ pageContext.setAttribute("newline", "\n");
 												<div class="line"></div>
 												<div class="reply-decs">${r.content }</div>
 												<div class="reply-info mt-2">
-													<span>${r.uname }</span> <span>${r.modTime }</span>
+													<span>${fn:replace(r.modTime,'T',' ')}</span> <span>${r.uname }</span> 
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-							</c:when>
-						<c:otherwise>
-							<div class="d-flex flex-row mt-3">
-								<div class="card subcolor w-75">
-									<div class="card-body">
-										<div class="le-padding">
-											<div class="re-star mb-2">
-												<c:forEach begin="1" end="${r.grade }">
-													<span class="fa-star fa on"></span>
-												</c:forEach>
-												<c:forEach begin="1" end="${5 - r.grade }">
-													<span class="fa-star fa"></span>
-												</c:forEach>
-											</div>
-											<div class="line"></div>
-											<div class="reply-decs">${r.content }</div>
-											<div class="reply-info mt-2">
-												<span>${r.uname }</span> <span>${r.modTime }</span>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</c:otherwise>
+							</c:otherwise>
 						</c:choose>
 					</c:forEach>
 

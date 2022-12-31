@@ -17,7 +17,6 @@ public interface BoardService {
 	public static final int B_REC = 1;
 	public static final int B_AREA = 2;
 	
-	List<String> getStar(double grade);
 	
 	/** 조건에 맞는 리스트 출력 */
 	List<Board> viewList(int view, User u);
@@ -54,6 +53,10 @@ public interface BoardService {
 	
 	/** 리뷰 리스트 */
 	List<Review> rGetList(int bid);
+	
+	/** 조회수 증가 */
+	void increaseViewCount(int bid);
+
 	
 	
 

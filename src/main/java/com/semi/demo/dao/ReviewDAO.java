@@ -17,8 +17,7 @@ public interface ReviewDAO {
 	@Select("SELECT AVG(grade) FROM review WHERE bid = #{bid};")
 	double gradeAvg(int bid);
 	
-	@Select("SELECT u.uname, r.content, r.grade, r.modTime FROM review AS r JOIN user AS u ON u.uid = r.uid WHERE bid = #{bid};")
+	@Select("SELECT u.uname, r.uid, r.content, r.grade, r.modTime FROM review AS r JOIN user AS u ON u.uid = r.uid WHERE bid = #{bid} ORDER BY modTime DESC;")
 	List<Review> getList(int bid);
-	
 
 }

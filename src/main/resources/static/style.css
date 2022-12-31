@@ -142,7 +142,7 @@ h6 {
   width: 100%;
 }
 .content-title h3 {
-	color: #4880ee;
+  color: #4880ee;
 }
 
 .content-bottom {
@@ -880,6 +880,9 @@ textarea:focus {
 .reply-info {
   padding-bottom: 0.2rem;
 }
+.reply-info-me {
+  padding-bottom: 0.2rem;
+}
 
 .reply-info :first-child {
   font-weight: 800;
@@ -889,6 +892,15 @@ textarea:focus {
   font-weight: 300;
   color: #666;
   font-size: 14px;
+}
+.reply-info-me :first-child {
+  padding-right: 5px;
+  font-weight: 300;
+  color: #666;
+  font-size: 14px;
+}
+.reply-info-me :last-child {
+  font-weight: 800;
 }
 
 .reply-desc {
@@ -944,7 +956,7 @@ textarea:disabled.board-input {
   background-color: #f7f7f7;
 }
 
-.main-list-title{
-	padding-inline: 0.2rem;
-	cursor: pointer;
+.main-list-title {
+  padding-inline: 0.2rem;
+  cursor: pointer;
 }

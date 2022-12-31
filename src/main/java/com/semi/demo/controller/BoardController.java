@@ -74,22 +74,36 @@ public class BoardController {
 
 	/** C : 게시물 디테일 */
 	@RequestMapping("/detail/{bid}")
-	public String detail(@PathVariable int bid, Model model) {
+	public String detail(@PathVariable int bid, Model model, HttpServletRequest req) {
+		HttpSession ss = req.getSession();
+		User u = (User) ss.getAttribute("loginuser");
+		Board b_ = bsv.bInfo(bid);
+		
+		/** 조회수 증가 */
+		// 조회수 증가. 단, 본인이 읽거나 댓글 작성후에는 제외.
+		if (u == null || !u.getUid().equals(b_.getUid())) {
+			bsv.increaseViewCount(bid);
+		}
+		
+		
 		Board b = bsv.bInfo(bid);
 		model.addAttribute("b", b);
-		model.addAttribute("starlist", bsv.getStar(b.getGrade()));
-		
 		List<Review> rlist = bsv.rGetList(bid);
 		model.addAttribute("rlist", rlist);
+		
 		return "board/detail";
 	}
 
 	/** C : 리뷰작성 */
 	@PostMapping("/review")
 	public String review(@ModelAttribute Review r, HttpServletRequest req, Model model) {
-		if(r.getGrade() == 0) {
-			model.addAttribute("msg", "중복 아이디입니다.");
-			model.addAttribute("url", "/user/register");
+		if (r.getGrade() == 0) {
+			model.addAttribute("msg", "별점을 등록해주세요!");
+			model.addAttribute("url", "/board/detail/" + r.getBid());
+			return "user/msg";
+		}else if (r.getContent().isEmpty() || r.getContent() == null) {
+			model.addAttribute("msg", r.getGrade()+"점 주신 이유를 함께 작성해주세요!");
+			model.addAttribute("url", "/board/detail/" + r.getBid());
 			return "user/msg";
 		}
 		
@@ -98,7 +112,6 @@ public class BoardController {
 		bsv.rInsert(r, u);
 		return "redirect:/board/detail/" + r.getBid();
 	}
-	
 
 	/** C : 게시물 작성 */
 	@GetMapping("/write")

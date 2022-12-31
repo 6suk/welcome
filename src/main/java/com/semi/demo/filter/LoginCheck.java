@@ -27,21 +27,7 @@ public class LoginCheck extends HttpFilter implements Filter {
 		HttpSession ss = req.getSession();
 
 		String uri = req.getRequestURI();
-		int case_ = 0;
 
-//		String[] urlPatterns = { "/board/review", "/board/bookmark", "/user/list", "/user/update", "/user/delete" };
-//		for (String routing : urlPatterns) {
-//			if (uri.contains(routing)) {
-//				String uid = (String) ss.getAttribute("uid");
-//				if (uid == null || uid.equals("")) {
-//					res.sendRedirect("/board/main");
-//					return;
-//				}
-//				break;
-//			}
-//		}
-
-//		String[] url = { "/board/review", "/board/bookmark", "/user/update", "/user/delete" };
 		List<String> url = Arrays.asList("/board/review", "/board/bookmark", "/user/update", "/user/delete");
 		for (String a : url) {
 			if (uri.contains(a)) {
