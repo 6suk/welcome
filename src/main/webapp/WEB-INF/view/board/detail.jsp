@@ -56,9 +56,15 @@ pageContext.setAttribute("newline", "\n");
 								</div>
 							</div>
 							<div>
-								<span class="material-symbols-outlined fill"
+								<c:set var="fill" value="" />
+								<c:set var="url" value="bookmark/${b.bid }" />
+								<c:if test="${like eq true }">
+									<c:set var="fill" value="fill"></c:set>
+									<c:set var="url" value="bookmark/del/${b.bid }" />
+								</c:if>
+								<span class="bookmark material-symbols-outlined ${fill }"
 									style="font-size: 28px"
-									onclick="location.href='/board/bookmark/${b.bid}/${loginuser.uid}'">
+									onclick="location.href='/board/${url }'">
 									bookmark </span>
 							</div>
 						</div>
@@ -92,7 +98,7 @@ pageContext.setAttribute("newline", "\n");
 								</tr>
 								<tr>
 									<th>홈페이지</th>
-									<td><a href='${b.homepage }'>${b.homepage }</a></td>
+									<td><a href='${b.homepage }' target='_blank'>${b.homepage }</a></td>
 								</tr>
 							</table>
 						</div>
@@ -106,7 +112,7 @@ pageContext.setAttribute("newline", "\n");
 				<!-- content -->
 				<div class="border-bottom mb-5"></div>
 				<!--리뷰-->
-				<div class="board-review-place">
+				<div class="board-review-place" id="review">
 					<h3 class="pb-3"
 						style="padding-top: 1rem; padding-bottom: 0.1em; text-align: center;">
 						${b.title }을 '리뷰'해 주세요!</h3>
@@ -180,8 +186,8 @@ pageContext.setAttribute("newline", "\n");
 												</div>
 												<div class="line"></div>
 												<div class="reply-decs">${r.content }</div>
-												<div class="reply-info mt-2">
-													<span>${fn:replace(r.modTime,'T',' ')}</span> <span>${r.uname }</span> 
+												<div class="reply-info-me mt-2">
+													<span>${fn:replace(r.modTime,'T',' ')}</span> <span>${r.uname }</span>
 												</div>
 											</div>
 										</div>

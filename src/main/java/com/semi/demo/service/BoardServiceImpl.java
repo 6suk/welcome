@@ -2,26 +2,19 @@ package com.semi.demo.service;
 
 import java.io.File;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpSession;
+import java.util.stream.Collector;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.semi.demo.dao.BoardDAO;
 import com.semi.demo.dao.BookmarkDAO;
 import com.semi.demo.dao.FindDAO;
 import com.semi.demo.dao.ReviewDAO;
-import com.semi.demo.dao.UserDAO;
 import com.semi.demo.entity.Board;
 import com.semi.demo.entity.BookMark;
 import com.semi.demo.entity.Review;
@@ -48,11 +41,7 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<Board> viewList(int view, User u) {
 		List<Board> list = null;
-
 		String uid = null;
-		if (u != null) {
-			uid = u.getUid();
-		}
 
 		switch (view) {
 		case B_ALL:
@@ -67,7 +56,14 @@ public class BoardServiceImpl implements BoardService {
 
 		case B_AREA:
 			// 가까운 유치원 리스트
+			uid = u.getUid();
 			list = bdao.areaList(u.getArea());
+			return list;
+
+		case B_LIKE:
+			// 북마크 페이지
+			uid = u.getUid();
+			list = mdao.GetLikeList(uid);
 			return list;
 		default:
 			break;
@@ -132,18 +128,22 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void mInsert(String uid, int bid) {
 		mdao.mInsert(uid, bid);
-		System.out.println("[북마크 등록 완료]");
+		mdao.likeUp(bid);
 	}
 
 	@Override
 	public void mDelete(String uid, int bid) {
-		// TODO Auto-generated method stub
-
+		mdao.mDelete(uid, bid);
+		mdao.likeDown(bid);
 	}
 
 	@Override
-	public List<BookMark> mGetList(String uid) {
-		return mdao.mGetList(uid);
+	public List<Integer> bmGetList(User u) {
+		if (u == null) {
+			return null;
+		} else {
+			return mdao.mGetList(u.getUid());
+		}
 	}
 
 	@Override
@@ -172,23 +172,22 @@ public class BoardServiceImpl implements BoardService {
 		list.forEach(x -> x.getBid());
 		return list;
 	}
-		
+
 	@Override
 	public void rInsert(Review r, User u) {
 		r.setUid(u.getUid());
 		rdao.insert(r);
-		
+
 		// 리뷰 등록 후 평균 구하기 + boardDao 등록
 		double avg = rdao.gradeAvg(r.getBid());
 		System.out.println(avg);
 		bdao.gradeAvgUpdate(avg, r.getBid());
-		
+
 		// 리뷰 등록 후 reCut + 1
 		bdao.reCntUpdate(r.getBid());
-		
+
 	}
 
-	
 	@Override
 	public List<Review> rGetList(int bid) {
 		return rdao.getList(bid);
@@ -206,13 +205,11 @@ public class BoardServiceImpl implements BoardService {
 		}
 		return sb.toString();
 	}
-	
+
 	/** 조회수 증가 */
 	@Override
 	public void increaseViewCount(int bid) {
 		bdao.increaseCount(bid);
 	}
 
-	
-	
 }

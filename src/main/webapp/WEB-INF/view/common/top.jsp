@@ -10,7 +10,7 @@
 				src='/img/logo.png' class="logo" />
 			</a>
 			<li class="nav-item"><a
-				class="nav-link ${menu eq '3' ? 'active' : ''}" href="/board/main">Home</a>
+				class="nav-link ${menu eq 'main' ? 'active' : ''}" href="/board/main">Home</a>
 			</li>
 			<li class="nav-item"><a
 				class="nav-link ${menu eq '0' ? 'active' : ''}" href="/board/list/0">전체리스트</a>

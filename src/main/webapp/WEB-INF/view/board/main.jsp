@@ -76,31 +76,30 @@
 									onclick="location.href='/board/detail/${b.bid}'" />
 							</div>
 							<div class="content-list-bookmark mb-2">
+								<!-- 태그 -->
 								<p class="board-view-tag">
 									<c:set var="t" value="${fn:split(b.tag,'/')}"></c:set>
 									<c:forEach var="w" items="${t}">
 										<span class="subcolor">${w}</span>
 									</c:forEach>
 								</p>
+
+								<!-- 북마크 -->
+								<c:set var="fill" value="" />
+								<c:set var="url" value="bookmark/${b.bid }" />
 								<c:forEach var="m" items="${mlist }">
-									<c:choose>
-										<c:when test="${m.bid eq b.bid }">
-											<span class="material-symbols-outlined fill"
-												onclick="location.href='/board/bookmarkdel/${b.bid}/${uid}'">
-												bookmark </span>
-										</c:when>
-										<c:otherwise>
-											<span class="material-symbols-outlined"
-												onclick="location.href='/board/bookmark/${b.bid}/${uid}'">
-												bookmark </span>
-										</c:otherwise>
-									</c:choose>
+									<c:if test="${m eq b.bid }">
+										<c:set var="fill" value="fill" />
+										<c:set var="url" value="bookmark/del/${b.bid }" />
+									</c:if>
 								</c:forEach>
-								<span class="material-symbols-outlined"
-									onclick="location.href='/board/bookmark/${b.bid}/${uid}'">
-									bookmark </span>
+
+								<span class="bookmark material-symbols-outlined ${fill }"
+									onclick="location.href='/board/${url}'"> bookmark </span>
+								<!-- 북마크 -->
 							</div>
-							<div class="main-list-title mb-3" onclick = "location.href='/board/detail/${b.bid}'">
+							<div class="main-list-title mb-3"
+								onclick="location.href='/board/detail/${b.bid}'">
 								<h5 class="mb-1">${b.title }</h5>
 								<p>${b.addr }</p>
 							</div>

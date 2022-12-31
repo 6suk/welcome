@@ -16,6 +16,7 @@ public interface BoardService {
 	public static final int B_ALL = 0;
 	public static final int B_REC = 1;
 	public static final int B_AREA = 2;
+	public static final int B_LIKE = 3;
 	
 	
 	/** 조건에 맞는 리스트 출력 */
@@ -46,7 +47,7 @@ public interface BoardService {
 	void mDelete(String uid, int bid);
 	
 	/** 북마크 리스트 */
-	List<BookMark> mGetList(String uid);
+	List<Integer> bmGetList(User u);
 
 	/** 리뷰 등록 */
 	void rInsert(Review r, User u);
@@ -56,8 +57,5 @@ public interface BoardService {
 	
 	/** 조회수 증가 */
 	void increaseViewCount(int bid);
-
-	
-	
 
 }

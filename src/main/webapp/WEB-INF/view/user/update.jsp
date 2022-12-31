@@ -59,7 +59,7 @@
 					</tr>
 					<tr>
 						<th>주소</th>
-						<td><select name="area">
+						<td><select name="area" class="form-select">
 								<option value="서울">서울</option>
 								<option value="부산">부산</option>
 								<option value="대구">대구</option>

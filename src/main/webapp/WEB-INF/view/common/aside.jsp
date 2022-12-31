@@ -38,8 +38,9 @@
 						</c:when>
 						<c:otherwise>
 							<div class="intro-msg-main p-2 pb-3">
-								<h4>${loginuser.uname}님 환영합니다!</h4>
-								<span class="material-symbols-outlined fill"> waving_hand </span>
+								<h4>${loginuser.uname}님환영합니다!</h4>
+								<span class="material-symbols-outlined fill"> waving_hand
+								</span>
 							</div>
 						</c:otherwise>
 					</c:choose>
@@ -73,14 +74,31 @@
 							</c:otherwise>
 						</c:choose>
 					</table>
+					<c:choose>
+						<c:when test="${loginuser.uid eq 'admin' }">
+							<div class="intro-btn">
+								<button class="btn mdi100 maincolor mx-1"
+									onclick="location.href='/board/write'">게시물 등록</button>
+								<button class="btn mdi100 subcolor mx-1"
+									onclick="location.href='/user/list'">유저 관리</button>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div class="intro-btn">
+								<button class="btn mdi100 subcolor mx-1"
+									onclick="location.href='/user/update/${loginuser.uid}'">정보
+									수정하기</button>
+								<button class="btn mdi100 graycolor mx-1"
+									onclick="location.href='/user/logout'">로그아웃</button>
+							</div>
+							<div class="bookmark-btn">
+								<button class="btn mdi100 maincolor mx-1"
+									onclick="location.href='/board/list/3'">
+									북마크 보러가기</button>
+							</div>
+						</c:otherwise>
+					</c:choose>
 
-					<div class="intro-btn">
-						<button class="btn mdi100 subcolor mx-1"
-							onclick="location.href='/user/update/${loginuser.uid}'">정보
-							수정하기</button>
-						<button class="btn mdi100 graycolor mx-1"
-							onclick="location.href='/user/logout'">로그아웃</button>
-					</div>
 				</c:otherwise>
 			</c:choose>
 		</div>

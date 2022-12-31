@@ -12,4 +12,4 @@
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <link rel="stylesheet" href="/style.css" />
-<title>6Suk BBS Project</title>
+<title>어서와 - 강아지 유치원 찾기</title>

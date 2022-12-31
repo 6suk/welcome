@@ -39,28 +39,15 @@
 							<td>${u.area}</td>
 							<td>${fn:substringBefore(loginuser.regDate, 'T')}</td>
 							<td>
-							<c:choose>
-								<c:when test="${uid eq 'admin'}">
-									<button class="btn action subcolor" type="button"
-										onclick="location.href='/user/update?uid=${u.uid}'">수정</button>
-								</c:when>
-								<c:otherwise>
-									<button class="btn action subcolor" type="button" disabled>수정</button>
-								</c:otherwise>
-							</c:choose> <%-- 삭제 버튼 시작 --%> <c:choose>
-								<c:when test="${uid ne 'admin'}">
-									<button class="btn action subcolor" type="button" disabled>삭제</button>
-								</c:when>
-								<c:otherwise>
-									<button class="btn action subcolor" type="button"
-										onclick="location.href='/user/delete?uid=${u.uid}'">삭제</button>
-								</c:otherwise>
-							</c:choose>
+								<button class="btn action subcolor" type="button"
+									onclick="location.href='/user/update/${u.uid}'">수정</button>
+								<button class="btn action subcolor" type="button"
+									onclick="location.href='/user/delete/${u.uid}'">삭제</button>
 							</td>
 						</tr>
 					</c:forEach>
 				</table>
-				
+
 			</div>
 			<!-- content - 리스트 // -->
 		</div>
