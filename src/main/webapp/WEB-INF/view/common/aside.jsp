@@ -38,7 +38,7 @@
 						</c:when>
 						<c:otherwise>
 							<div class="intro-msg-main p-2 pb-3">
-								<h4>${loginuser.uname}님환영합니다!</h4>
+								<h4>${loginuser.uname}님 환영합니다!</h4>
 								<span class="material-symbols-outlined fill"> waving_hand
 								</span>
 							</div>

@@ -84,7 +84,6 @@ public class BoardController {
 		boolean nocnt = ss.getAttribute("nocnt") != null ? (boolean) ss.getAttribute("nocnt") : false;
 
 		/** 조회수 증가 */
-		// 조회수 증가. 단, 본인이 읽거나 댓글 작성후에는 제외.
 		if (!nocnt && !loginuid.equals(b_.getUid())) {
 			bsv.increaseViewCount(bid);
 		}
@@ -135,6 +134,14 @@ public class BoardController {
 
 		bsv.bInsert(b, file, u);
 		return "redirect:/board/list";
+	}
+	
+	@GetMapping("/update/{bid}")
+	public String updateForm(@PathVariable int bid, Model model) {
+		Board b = bsv.bInfo(bid);
+		b.setTagBox(b.getTag().split("/"));
+		model.addAttribute("b", b);
+		return "board/update";
 	}
 
 	/** 북마크 등록 */

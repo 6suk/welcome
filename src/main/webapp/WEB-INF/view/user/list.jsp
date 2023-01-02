@@ -37,7 +37,7 @@
 							<td>${u.uname}</td>
 							<td>${u.email}</td>
 							<td>${u.area}</td>
-							<td>${fn:substringBefore(loginuser.regDate, 'T')}</td>
+							<td>${fn:substringBefore(u.regDate, 'T')}</td>
 							<td>
 								<button class="btn action subcolor" type="button"
 									onclick="location.href='/user/update/${u.uid}'">수정</button>

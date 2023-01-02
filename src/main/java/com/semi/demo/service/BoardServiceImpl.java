@@ -86,16 +86,7 @@ public class BoardServiceImpl implements BoardService {
 
 		/** 태그 */
 		if (b.getTag() != null) {
-			String[] tagBox = b.getTag().split(",");
-			StringBuilder sb = new StringBuilder();
-			for (int i = 0; i < tagBox.length; i++) {
-				int index = Integer.parseInt(tagBox[i]);
-				if (i == 0)
-					sb.append(TAG[index]);
-				else
-					sb.append("/").append(TAG[index]);
-			}
-			b.setTag(sb.toString());
+			b.setTag(b.getTag().replace(",", "/"));
 		}
 
 		/** 유니크한 확장자명 */

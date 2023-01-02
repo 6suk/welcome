@@ -172,15 +172,20 @@ public class UserController {
 
 	/** 회원 삭제 */
 	@GetMapping("/delete/{uid}")
-	public String delete(@PathVariable String uid) {
-		service.delete(uid);
+	public String deleteForm(@PathVariable String uid, Model model) {
+		User u = service.get(uid);
+		model.addAttribute("user", u);
 		return "user/delete";
 	}
 
-	@GetMapping("/delete/c/{uid}")
-	public String deleteC(@PathVariable String uid) {
+	@PostMapping("/delete")
+	public String delete(HttpServletRequest req, Model model) {
+		String uid = req.getParameter("uid");
 		service.delete(uid);
-		return "redirect:/user/list";
+		
+		model.addAttribute("msg", "탈퇴 완료 되었습니다.");
+		model.addAttribute("url", "/board/main");
+		return "/user/msg";
 	}
 
 }

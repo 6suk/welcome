@@ -33,15 +33,38 @@
 					<form action="/board/main" method="post">
 						<table class="main-search-tb">
 							<tr>
-								<td><p>Tag 검색</p></td>
+								<th class="txtmain">Tag 검색</th>
 								<td><input name="findtag" class="some_class_name"
 									value="${findtag}" /></td>
 							</tr>
-							<tr>
+<%-- 							<tr>
 								<td><p>지역</p></td>
 								<td><input name="findarea" class="some_class_name"
 									value="${findarea }" /></td>
+							</tr> --%>
+							<tr>
+								<th class="txtmain">지역 검색</th>
+						<td><select name="area" class="form-select board-input" style="color:#333">
+									<option value="전체">전체</option>
+									<option value="서울">서울</option>
+									<option value="부산">부산</option>
+									<option value="대구">대구</option>
+									<option value="인천">인천</option>
+									<option value="광주">광주</option>
+									<option value="대전">대전</option>
+									<option value="울산">울산</option>
+									<option value="세종">세종</option>
+									<option value="경기">경기</option>
+									<option value="강원">강원</option>
+									<option value="충청도">충청도</option>
+									<option value="경상도">경상도</option>
+									<option value="전라도">전라도</option>
+									<option value="제주도">제주도</option>
+						</select></td>
 							</tr>
+							
+							
+							
 							<tr>
 								<td colspan="2"><input class="btn full maincolor"
 									type="submit" value="검색" /></td>

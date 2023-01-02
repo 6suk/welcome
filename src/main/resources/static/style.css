@@ -621,6 +621,7 @@ input[type='file'] {
   border-radius: 10px;
   /* border: solid 2px #e2edff; */
 }
+
 .main-search h3 {
   color: #4880ee;
   padding-bottom: 1rem;
@@ -666,6 +667,7 @@ input:focus {
   /* --tags-border-color: none !important; */
   /* background-color: #e2edff; */
   border-radius: 5px;
+  border: 1px solid #d1d1d1 !important;
 }
 
 .tagify__tag > div > * {
@@ -674,7 +676,7 @@ input:focus {
 }
 
 .tagify__tag {
-  margin: 8px 0 8px 10px !important;
+  margin: 10px 0 10px 10px !important;
 }
 
 .tags-look .tagify__dropdown__item {
@@ -710,6 +712,7 @@ input:focus {
   text-indent: -20px;
   border: 0;
 }
+
 /* 게시물 디테일 */
 
 .board-view {
